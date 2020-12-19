@@ -185,14 +185,14 @@ void Sort(std::vector<int>* data) {
 
                 std::vector<int> tmp(countPerProc * 2);
 
-                for (size_t j = 0, k = 0, l = 0; l < countPerProc * 2; l++) {
+                for (int j = 0, k = 0, l = 0; l < countPerProc * 2; l++) {
                     if (j < countPerProc && (k >= countPerProc || localData[j] < recvData[k]))
                         tmp[l] = localData[j++];
                     else
                         tmp[l] = recvData[k++];
                 }
                 MPI_Send(tmp.data(), countPerProc, MPI_INT, comps[i].first, 3, MPI_COMM_WORLD);
-                for (size_t j = 0; j < countPerProc; j++) {
+                for (int j = 0; j < countPerProc; j++) {
                     localData[j] = tmp[j + countPerProc];
                 }
             }
