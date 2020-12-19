@@ -145,7 +145,7 @@ void Sort(std::vector<int>* data) {
     std::vector<std::pair<int, int>> comps = Batcher(maxSize);
 
     // calculating how many of data will owns each proc
-    size_t countPerProc;
+    int countPerProc;
     if (rank == 0) {
         while (data->size() % size != 0) {
             data->push_back(MY_INT_MAX);
