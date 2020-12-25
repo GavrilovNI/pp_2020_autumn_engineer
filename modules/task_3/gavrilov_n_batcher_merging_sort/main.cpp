@@ -47,6 +47,20 @@ TEST(Parallel_Operations_MPI, Sorting_Right) {
     }
 }
 
+TEST(Parallel_Operations_MPI, Sorting_Time) {
+    int rank, size;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
+	
+    std::vector<int> data = GetRandomVector(1000000);
+	
+    double t1 = MPI_Wtime();
+    Sort(&data);
+    if (rank == 0) {
+		std::cout<<"time(100000): "<<(MPI_Wtime() - t1)<<std::endl;
+    }
+}
+
 TEST(Parallel_Operations_MPI, Sort_By_Num_Place_Rang10) {
     std::vector<int> data = GetRandomVector(10000);
     int rank;
